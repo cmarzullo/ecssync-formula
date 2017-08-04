@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<uiConfig xmlns:ns2="http://www.emc.com/ecs/sync/model">
+  <configStorageType>LocalDisk</configStorageType>
+  <filePath>/opt/emc/ecs-sync/config</filePath>
+  <protocol>HTTP</protocol>
+  <port>9020</port>
+  <configBucket>ecs-sync</configBucket>
+  <autoArchive>false</autoArchive>
+  <alertEmail>root@localhost</alertEmail>
+</uiConfig>

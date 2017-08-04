@@ -1,0 +1,17 @@
+{% from "ecssync/map.jinja" import ecssync with context -%}
+[Unit]
+Description=ECS-Sync UI Service
+After=network.target remote-fs.target nss-lookup.target
+
+[Service]
+EnvironmentFile=/etc/sysconfig/ecs-sync-ui
+WorkingDirectory={{ ecssync.config.install_dir }}
+ExecStart=/usr/bin/java $JAVA_OPTS -jar {{ ecssync.config.install_dir }}/lib/ecs-sync-ui.jar
+SuccessExitStatus=143
+TimeoutStopSec=10
+Restart=on-failure
+RestartSec=5
+User={{ ecssync.config.user }}
+
+[Install]
+WantedBy=multi-user.target

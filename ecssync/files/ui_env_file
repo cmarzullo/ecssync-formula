@@ -1,0 +1,6 @@
+##
+## ECS-Sync-UI Main Options
+##
+
+# Java
+JAVA_OPTS="{{ config.java_opts }}"

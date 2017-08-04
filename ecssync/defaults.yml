@@ -1,0 +1,45 @@
+# vim: ft=yaml
+# Defaults for ecssync
+
+ecssync:
+  enabled: true
+  install:
+    base_url: https://github.com/EMCECS/ecs-sync/releases/download
+    version: 3.2.2
+    sync_hash: 5446b83cc143da9b979b488268c84270
+    ui_hash: e28e363bef05734905d136eb9c456f7f
+    prereq:
+      - epel-release
+    required:
+      - java-1.8.0-openjdk
+      - java-1.8.0-openjdk-devel
+      - nfs-utils
+      - samba-client
+      - cifs-utils
+      - iperf
+      - sysstat
+      - bind-utils
+      - unzip
+      - httpd
+      - mod_ssl
+      - mariadb-server
+  config:
+    dist_dir: /opt
+    install_dir: /opt/emc/ecs-sync
+    user: ecssync
+    # unix password:  ECS-Sync
+    password: $6$CnBjowq5$lpb2nPNtzv1.wf65mmt9JUNmq.DsnzJgSVk.7tagB5zRicz38zE97PWeuauxUzqKui4VlUjBEKrfIpkLsyFLb1
+    httpd_conf_src: salt://ecssync/files/ecs-sync.conf
+    httpd_options: p
+    httpd_users:
+      # htpasswd is ecs-sync
+      admin: $apr1$nXzDaB7N$T899OmZQ4nOrxEDlCFb4S1
+    mysql_cnf_name: /etc/my.cnf.d/ecs_opts.cnf
+    mysql_cnf_src: salt://ecssync/files/ecs_opts.cnf
+    mysql_root_password: thisisadefaultpassword
+    mysql_ecssync_user: ecssync
+    mysql_ecssync_password: ecs-sync-db
+    template: salt://ecssync/files/config_template.yml
+    ui_template: salt://ecssync/files/ui-config.xml
+    main_java_opts: -server -Xmx12G -XX:+UseParallelGC
+    ui_java_opts: -server -noverify -Xms1G -Xmx2G -XX:+UseParallelGC

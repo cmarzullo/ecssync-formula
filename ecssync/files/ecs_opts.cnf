@@ -1,0 +1,5 @@
+[server]
+innodb_file_format = Barracuda
+innodb_large_prefix = 1
+innodb_file_per_table = 1
+bind_address = 127.0.0.1

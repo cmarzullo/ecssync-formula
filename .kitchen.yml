@@ -1,0 +1,36 @@
+# vim: ft=yaml
+---
+driver:
+  name: vagrant
+  customize:
+    memory: 2048
+  network:
+    - ["forwarded_port", {guest: 443, host: 8443, auto_correct: true}]
+
+provisioner:
+  name: salt_solo
+  log_level: info
+  is_file_root: true
+  salt_copy_filter:
+    - .kitchen
+    - .git
+  state_top:
+    base:
+      "*":
+        - ecssync
+
+platforms:
+  - name: bento/centos-7.3
+
+suites:
+  - name: default
+
+  - name: custom
+    provisioner:
+      pillars-from-files:
+        ecssync.sls: pillar-custom.sls
+      pillars:
+        top.sls:
+          base:
+            "*":
+              - ecssync
